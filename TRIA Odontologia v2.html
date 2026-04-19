@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRIA Odontología — Tu sonrisa, nuestra misión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root {
+  --green-deep: #0b1c0e;
+  --green-mid:  #1e4025;
+  --green-acc:  #4a9e5c;
+  --green-light:#7ec98a;
+  --green-pale: #e8f5ea;
+  --cream:      #faf8f4;
+  --cream2:     #f2efe9;
+  --text:       #111109;
+  --text-dim:   #7a7870;
+  --white:      #ffffff;
+  --display:    'Syne', sans-serif;
+  --body:       'DM Sans', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{
+  background:var(--cream);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── NOISE ── */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;
+  opacity:.025;
+  background-image:url("uploads/imagen.jpg");
+}
+
+/* cursor normal */
+
+/* ── PRELOADER ── */
+#preloader{
+  position:fixed;inset:0;z-index:9990;
+  background:var(--green-deep);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2rem;
+}
+#preloader .brand{
+  font-family:var(--display);font-size:clamp(4rem,12vw,10rem);
+  font-weight:800;letter-spacing:-0.04em;
+  color:var(--white);overflow:hidden;display:flex;gap:0.04em;
+}
+#preloader .brand span{display:inline-block;transform:translateY(110%)}
+#preloader .tagline{
+  font-family:var(--body);font-size:.75rem;letter-spacing:.25em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+  opacity:0;
+}
+#preloader .bar-wrap{width:160px;height:1px;background:rgba(255,255,255,.1);margin-top:.5rem;overflow:hidden}
+#preloader .bar{height:100%;width:0%;background:var(--green-acc);transition:width .05s linear}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.6rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .4s,backdrop-filter .4s,padding .4s;
+}
+nav.scrolled{
+  background:rgba(11,28,14,.92);
+  backdrop-filter:blur(12px);
+  padding:1.1rem 4rem;
+}
+.nav-logo{
+  font-family:var(--display);font-size:1.5rem;font-weight:800;
+  color:var(--white);letter-spacing:-0.03em;text-decoration:none;
+}
+.nav-logo span{color:var(--green-acc)}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{
+  font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.65);text-decoration:none;
+  transition:color .25s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{
+  background:var(--green-acc);color:var(--white);
+  font-family:var(--display);font-size:.75rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.7rem 1.6rem;border-radius:2px;text-decoration:none;
+  transition:background .25s,transform .25s;
+}
+.nav-cta:hover{background:var(--green-light);transform:translateY(-1px)}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;position:relative;
+  background:var(--green-deep);
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+.hero-bg-shape{
+  position:absolute;right:-10%;top:-15%;
+  width:65%;height:130%;
+  background:var(--green-mid);
+  clip-path:polygon(18% 0%,100% 0%,100% 100%,0% 100%);
+  z-index:0;
+}
+.hero-photo{
+  position:absolute;right:0;top:0;bottom:0;
+  width:52%;z-index:1;overflow:hidden;
+}
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  transform:scale(1.08);
+  transition:transform 8s ease;
+}
+.hero-photo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,var(--green-deep) 0%,transparent 35%),
+             linear-gradient(to top,var(--green-deep) 0%,transparent 30%);
+  z-index:2;
+}
+.hero-content{
+  position:relative;z-index:10;
+  padding:12rem 4rem 6rem;
+  max-width:720px;
+}
+.hero-eyebrow{
+  font-family:var(--body);font-size:.7rem;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--green-acc);
+  margin-bottom:2rem;display:flex;align-items:center;gap:1rem;overflow:hidden;
+}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--green-acc);flex-shrink:0}
+.hero-title{
+  font-family:var(--display);
+  font-size:clamp(3.2rem,7vw,7rem);
+  font-weight:800;line-height:.94;
+  letter-spacing:-0.04em;color:var(--white);
+  margin-bottom:2rem;
+}
+.hero-title .line{overflow:hidden;display:block}
+.hero-title .line span{display:block}
+.hero-title em{font-style:normal;color:var(--green-acc)}
+.hero-desc{
+  font-size:1rem;color:rgba(255,255,255,.55);max-width:36ch;
+  line-height:1.75;margin-bottom:3rem;
+}
+.hero-actions{display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.btn-primary{
+  background:var(--green-acc);color:var(--white);
+  font-family:var(--display);font-size:.8rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.95rem 2.2rem;border-radius:2px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:.75rem;
+  transition:background .25s,transform .25s;
+  border:none;cursor:none;
+}
+.btn-primary:hover{background:var(--green-light);transform:translateY(-2px)}
+.btn-primary svg{width:16px;height:16px}
+.btn-ghost{
+  font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);text-decoration:none;
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:color .25s;
+}
+.btn-ghost:hover{color:var(--white)}
+.hero-stats{
+  position:absolute;bottom:0;right:0;width:50%;z-index:10;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(255,255,255,.08);
+  border-left:1px solid rgba(255,255,255,.08);
+}
+.stat{
+  padding:1.6rem 1.5rem;text-align:center;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.stat:last-child{border-right:none}
+.stat-num{
+  font-family:var(--display);font-size:2.2rem;font-weight:800;
+  color:var(--white);line-height:1;letter-spacing:-0.03em;
+}
+.stat-num span{color:var(--green-acc)}
+.stat-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.4rem}
+
+/* ── MARQUEE ── */
+.marquee-wrap{
+  background:var(--green-acc);overflow:hidden;
+  padding:.9rem 0;white-space:nowrap;
+}
+.marquee-track{
+  display:inline-flex;gap:3rem;
+  animation:marquee 18s linear infinite;
+}
+.marquee-track span{
+  font-family:var(--display);font-size:.75rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--green-deep);
+}
+.marquee-track .dot{color:var(--green-deep);opacity:.4}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTION COMMONS ── */
+section{position:relative}
+.section-label{
+  font-family:var(--body);font-size:.65rem;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--green-acc);
+  margin-bottom:1.2rem;display:flex;align-items:center;gap:.75rem;
+}
+.section-label::before{content:'';width:1.5rem;height:1px;background:var(--green-acc);flex-shrink:0}
+.section-title{
+  font-family:var(--display);font-size:clamp(2.2rem,4.5vw,4.2rem);
+  font-weight:800;line-height:1.0;letter-spacing:-0.03em;
+}
+.section-title em{font-style:normal;color:var(--green-acc)}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ── SERVICES ── */
+#services{padding:7rem 4rem;background:var(--cream)}
+.services-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.services-desc{font-size:1rem;color:var(--text-dim);max-width:38ch;line-height:1.75}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,0,0,.06)}
+.srv-card{
+  background:var(--cream);padding:2.4rem 2rem;
+  position:relative;overflow:hidden;
+  transition:background .35s;
+}
+.srv-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--green-acc);transform:scaleX(0);transform-origin:left;
+  transition:transform .45s cubic-bezier(.16,1,.3,1);
+}
+.srv-card:hover::before{transform:scaleX(1)}
+.srv-card:hover{background:var(--white)}
+.srv-icon{
+  width:48px;height:48px;margin-bottom:1.8rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.srv-icon svg{width:36px;height:36px;stroke:var(--green-acc);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.srv-name{
+  font-family:var(--display);font-size:1.2rem;font-weight:700;
+  margin-bottom:.6rem;letter-spacing:-0.01em;
+}
+.srv-text{font-size:.85rem;color:var(--text-dim);line-height:1.65}
+.srv-num{
+  position:absolute;bottom:1.5rem;right:1.5rem;
+  font-family:var(--display);font-size:3rem;font-weight:800;
+  color:rgba(0,0,0,.04);line-height:1;pointer-events:none;
+}
+
+/* ── ABOUT — PINNED SCROLL ── */
+#about-outer{height:250vh;position:relative}
+#about{
+  position:sticky;top:0;height:100vh;
+  background:var(--green-deep);overflow:hidden;
+  display:flex;align-items:center;
+}
+.about-pin-inner{
+  width:100%;max-width:1200px;margin:0 auto;
+  padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;
+}
+.about-left{position:relative;min-height:320px}
+.about-step{
+  position:absolute;top:0;left:0;width:100%;
+  opacity:0;transform:translateY(30px);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;
+}
+.about-step.active{opacity:1;transform:none;pointer-events:auto}
+.about-step-label{
+  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--green-acc);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;
+}
+.about-step-label::before{content:'';width:1.5rem;height:1px;background:var(--green-acc)}
+.about-step h2{
+  font-family:var(--display);font-size:clamp(2.4rem,4.5vw,4.5rem);
+  font-weight:800;line-height:.95;letter-spacing:-0.04em;color:var(--white);
+  margin-bottom:1.5rem;
+}
+.about-step h2 em{font-style:normal;color:var(--green-light)}
+.about-step p{font-size:1rem;color:rgba(255,255,255,.5);line-height:1.8;max-width:42ch}
+
+/* Single morphing card on the right */
+.about-right{position:relative}
+.about-val-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-left:3px solid var(--green-acc);
+  padding:2.5rem;
+  transition:all .5s cubic-bezier(.16,1,.3,1);
+}
+.about-val-num{
+  font-family:var(--display);font-size:4rem;font-weight:800;
+  color:var(--green-acc);line-height:1;margin-bottom:1rem;
+  opacity:.6;
+}
+.about-val-title{
+  font-family:var(--display);font-size:1.4rem;font-weight:800;
+  color:var(--white);margin-bottom:.6rem;letter-spacing:-0.01em;
+}
+.about-val-desc{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.7}
+.about-val-progress{
+  display:flex;gap:.5rem;margin-top:2rem;
+}
+.about-val-progress-dot{
+  flex:1;height:2px;background:rgba(255,255,255,.1);
+  transition:background .4s;border-radius:1px;
+}
+.about-val-progress-dot.active{background:var(--green-acc)}
+
+.about-progress{
+  position:absolute;right:4rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.5rem;align-items:center;
+}
+.about-progress-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.15);transition:background .4s,transform .4s;
+}
+.about-progress-dot.active{background:var(--green-acc);transform:scale(1.5)}
+
+/* ── TEAM ── */
+#team{padding:7rem 4rem;background:var(--cream2)}
+.team-header{max-width:600px;margin-bottom:4rem}
+.team-photo-wrap{
+  position:relative;border-radius:3px;overflow:hidden;
+  max-height:600px;
+}
+.team-photo-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;transform:scale(1.05);
+  transition:transform 6s ease;
+}
+.team-photo-wrap:hover img{transform:scale(1.0)}
+.team-photo-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(11,28,14,.85) 0%,transparent 50%);
+  display:flex;align-items:flex-end;padding:2.5rem;
+}
+.team-caption{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--white)}
+.team-caption span{display:block;font-family:var(--body);font-size:.8rem;font-weight:400;color:rgba(255,255,255,.5);margin-top:.25rem}
+.team-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+.team-member-cards{display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.06)}
+.member-card{
+  background:var(--cream2);padding:1.8rem 2rem;
+  display:flex;align-items:center;gap:1.5rem;
+  transition:background .3s;
+}
+.member-card:hover{background:var(--white)}
+.member-avatar{
+  width:52px;height:52px;border-radius:50%;flex-shrink:0;
+  background:var(--green-pale);border:2px solid var(--green-acc);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--green-mid);
+}
+.member-name{font-family:var(--display);font-size:1rem;font-weight:700}
+.member-role{font-size:.78rem;color:var(--text-dim);margin-top:.15rem}
+
+/* ── TESTIMONIALS — HORIZONTAL SCROLL ── */
+#testi-outer{height:200vh;position:relative;background:var(--green-deep)}
+#testimonials{
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  background:var(--green-deep);display:flex;flex-direction:column;justify-content:center;
+}
+.testi-pin-inner{padding:0 4rem;max-width:none}
+.testi-top{margin-bottom:3rem}
+.testi-track-wrap{overflow:hidden;position:relative}
+.testi-track{
+  display:flex;gap:2rem;width:max-content;
+  will-change:transform;
+}
+.testi-card{
+  width:480px;flex-shrink:0;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  padding:3rem;position:relative;overflow:hidden;
+}
+.testi-card::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--green-acc),transparent);
+}
+.testi-quote{
+  font-family:var(--display);font-size:5rem;font-weight:800;
+  color:rgba(255,255,255,.04);line-height:1;
+  position:absolute;top:1rem;right:1.5rem;
+}
+.testi-stars{display:flex;gap:.25rem;margin-bottom:1.5rem}
+.star{width:12px;height:12px;background:var(--green-acc);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.testi-text{
+  font-size:1.05rem;color:rgba(255,255,255,.7);line-height:1.8;
+  margin-bottom:2rem;font-style:italic;
+}
+.testi-author{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--white)}
+.testi-detail{font-size:.68rem;color:var(--green-acc);letter-spacing:.15em;text-transform:uppercase;margin-top:.3rem}
+.testi-progress-bar{
+  width:200px;height:2px;background:rgba(255,255,255,.1);margin-top:2.5rem;
+}
+.testi-progress-fill{height:100%;width:0%;background:var(--green-acc);transition:width .1s linear}
+
+/* ── TURNOS MULTI-STEP ── */
+#turnos{padding:7rem 4rem;background:var(--cream);display:flex;flex-direction:column;align-items:center}
+.turnos-header{text-align:center;margin-bottom:3rem}
+.turnos-header .section-label{justify-content:center}
+.turnos-header .section-label::before{display:none}
+.turnos-header p{font-size:.92rem;color:var(--text-dim);margin-top:.6rem}
+.stepper{display:flex;align-items:center;margin-bottom:2.5rem}
+.step-item{display:flex;align-items:center}
+.step-circle{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:.85rem;font-weight:700;
+  background:rgba(0,0,0,.07);color:var(--text-dim);
+  transition:background .4s,color .4s,transform .4s,box-shadow .4s;
+  flex-shrink:0;position:relative;
+}
+.step-circle.active{background:var(--green-acc);color:#fff;transform:scale(1.18);box-shadow:0 0 0 5px rgba(74,158,92,.15)}
+.step-circle.done{background:var(--green-mid);color:#fff}
+.step-circle.done .snum{display:none}
+.step-circle.done::after{content:'✓';font-size:.8rem;animation:cpop .4s cubic-bezier(.16,1,.3,1)}
+@keyframes cpop{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1)}}
+.step-line{width:70px;height:2px;background:rgba(0,0,0,.08);transition:background .5s;flex-shrink:0}
+.step-line.done{background:var(--green-mid)}
+.form-card{
+  background:#fff;border-radius:16px;padding:2.5rem;
+  width:100%;max-width:640px;
+  box-shadow:0 6px 40px rgba(0,0,0,.08);
+  position:relative;overflow:hidden;min-height:320px;
+}
+.form-step{display:none}
+.form-step.active{display:block}
+.step-h{font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--green-deep);margin-bottom:1.4rem;letter-spacing:-0.01em}
+.mf-input{
+  width:100%;padding:.85rem 1.1rem;
+  border:1.5px solid rgba(0,0,0,.1);border-radius:10px;
+  font-family:var(--body);font-size:.93rem;color:var(--text);
+  background:var(--cream);outline:none;margin-bottom:.7rem;display:block;
+  transition:border-color .25s,background .25s;
+}
+.mf-input:focus{border-color:var(--green-acc);background:#fff}
+.sede-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:1.5rem}
+.sede-card{
+  border:1.5px solid rgba(0,0,0,.1);border-radius:10px;padding:1.1rem .8rem;
+  text-align:center;cursor:pointer;
+  transition:border-color .25s,background .25s,transform .2s;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+}
+.sede-card:not(.disabled):hover{border-color:var(--green-acc);background:var(--green-pale);transform:translateY(-2px)}
+.sede-card.selected{border-color:var(--green-acc);background:var(--green-pale)}
+.sede-card.disabled{opacity:.38;cursor:default;pointer-events:none}
+.sede-icon{font-size:1.3rem}
+.sede-name{font-family:var(--display);font-size:.82rem;font-weight:700;color:var(--green-deep)}
+.trat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:1.4rem}
+.trat-card{
+  border:1.5px solid rgba(0,0,0,.08);border-radius:8px;
+  padding:.75rem 1rem;cursor:pointer;font-size:.86rem;color:var(--text);
+  transition:border-color .2s,background .2s;
+}
+.trat-card:hover{border-color:var(--green-acc);background:var(--green-pale)}
+.trat-card.selected{border-color:var(--green-acc);background:var(--green-pale);color:var(--green-mid);font-weight:600}
+.disp-label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.6rem}
+.disp-grid{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.disp-pill{
+  border:1.5px solid rgba(0,0,0,.1);border-radius:20px;
+  padding:.5rem 1.1rem;font-size:.84rem;cursor:pointer;color:var(--text);
+  transition:border-color .2s,background .2s;
+}
+.disp-pill:hover{border-color:var(--green-acc);background:var(--green-pale)}
+.disp-pill.selected{border-color:var(--green-acc);background:var(--green-pale);color:var(--green-mid);font-weight:600}
+.form-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.4rem}
+.btn-prev{
+  border:1.5px solid rgba(0,0,0,.12);background:transparent;color:var(--text-dim);
+  font-family:var(--body);font-size:.86rem;padding:.62rem 1.3rem;border-radius:8px;cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.btn-prev:hover{border-color:var(--green-acc);color:var(--green-mid)}
+.btn-next{
+  background:var(--green-acc);color:#fff;font-family:var(--display);
+  font-size:.8rem;font-weight:700;letter-spacing:.08em;
+  padding:.72rem 1.8rem;border-radius:8px;border:none;cursor:pointer;
+  transition:background .25s,transform .2s,opacity .25s;opacity:.45;pointer-events:none;
+}
+.btn-next.ready{opacity:1;pointer-events:auto}
+.btn-next.ready:hover{background:var(--green-mid);transform:translateY(-1px)}
+/* Summary */
+.sum-icon{text-align:center;font-size:2rem;margin-bottom:.75rem}
+.sum-title{font-family:var(--display);font-size:1.25rem;font-weight:800;text-align:center;color:var(--green-deep);margin-bottom:.25rem}
+.sum-sub{text-align:center;font-size:.8rem;color:var(--text-dim);margin-bottom:1.4rem}
+.sum-rows{border:1px solid rgba(0,0,0,.07);border-radius:10px;overflow:hidden;margin-bottom:1rem}
+.sum-row{display:flex;justify-content:space-between;padding:.65rem 1rem;border-bottom:1px solid rgba(0,0,0,.05);font-size:.86rem}
+.sum-row:last-child{border-bottom:none}
+.sum-key{color:var(--text-dim)}
+.sum-val{font-weight:600;color:var(--green-deep)}
+.sum-note{text-align:center;font-size:.72rem;color:var(--text-dim);margin-bottom:1rem}
+.btn-wa{
+  width:100%;background:var(--green-deep);color:#fff;font-family:var(--display);
+  font-size:.84rem;font-weight:700;letter-spacing:.1em;
+  padding:1rem;border-radius:8px;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  transition:background .25s,transform .2s;
+}
+.btn-wa:hover{background:var(--green-mid);transform:translateY(-2px)}
+.btn-edit{
+  width:100%;background:transparent;border:1.5px solid rgba(0,0,0,.1);
+  color:var(--text-dim);font-family:var(--body);font-size:.83rem;
+  padding:.65rem;border-radius:8px;cursor:pointer;margin-top:.5rem;
+  transition:border-color .2s;
+}
+.btn-edit:hover{border-color:var(--green-acc)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--green-deep);padding:4rem 4rem 2rem;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.footer-top{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  gap:4rem;margin-bottom:3rem;
+}
+.footer-logo{
+  font-family:var(--display);font-size:2rem;font-weight:800;
+  color:var(--white);letter-spacing:-0.03em;margin-bottom:1rem;
+}
+.footer-logo span{color:var(--green-acc)}
+.footer-tagline{font-size:.88rem;color:rgba(255,255,255,.4);max-width:28ch;line-height:1.7}
+.footer-col-title{
+  font-family:var(--display);font-size:.7rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:1.2rem;
+}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-links a{
+  font-size:.9rem;color:rgba(255,255,255,.55);text-decoration:none;
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--white)}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.06);
+  font-size:.72rem;color:rgba(255,255,255,.25);letter-spacing:.1em;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav{padding:1.4rem 2rem}
+  nav.scrolled{padding:1rem 2rem}
+  #hero{flex-direction:column;align-items:stretch}
+  .hero-photo{position:relative;width:100%;height:50vh;right:0}
+  .hero-bg-shape{display:none}
+  .hero-content{padding:2rem 2rem 3rem}
+  .hero-stats{position:relative;bottom:auto;right:auto;padding:0 2rem 2rem;justify-content:flex-start}
+  #services{padding:4rem 2rem}
+  .services-header{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  #about{grid-template-columns:1fr;padding:4rem 2rem}
+  #team{padding:4rem 2rem}
+  .team-layout{grid-template-columns:1fr}
+  #testimonials{padding:4rem 2rem}
+  .testi-grid{grid-template-columns:1fr}
+  #turnos{padding:4rem 2rem}
+  .footer-top{grid-template-columns:1fr;gap:2rem}
+  footer{padding:3rem 2rem 1.5rem}
+  .footer-bottom{flex-direction:column;gap:.75rem;text-align:center}
+  .nav-links{display:none}
+}
+@media(max-width:640px){
+  .services-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column;gap:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR removed - using system cursor -->
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="brand">
+    <span>T</span><span>R</span><span>I</span><span>A</span>
+  </div>
+  <div class="tagline">Odontología de Calidad</div>
+  <div class="bar-wrap"><div class="bar" id="bar"></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#hero">TRIA<span>.</span></a>
+  <div class="nav-links">
+    <a href="#services">Servicios</a>
+    <a href="#about">Nosotros</a>
+    <a href="#team">Equipo</a>
+    <a href="#testimonials">Pacientes</a>
+  </div>
+  <a class="nav-cta" href="#turnos">Pedir Turno</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-photo">
+    <img src="uploads/imagen.jpg" alt="Equipo TRIA" id="hero-img">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="eyebrow">Clínica Odontológica · Buenos Aires</div>
+    <h1 class="hero-title">
+      <span class="line"><span id="h1">Tu sonrisa,</span></span>
+      <span class="line"><span id="h2">nuestra</span></span>
+      <span class="line"><span id="h3"><em>misión.</em></span></span>
+    </h1>
+    <p class="hero-desc" id="hero-desc">
+      En TRIA combinamos tecnología de vanguardia con un equipo apasionado para darte la atención que te merecés. Cada tratamiento, un compromiso con tu bienestar.
+    </p>
+    <div class="hero-actions" id="hero-actions">
+      <a href="#turnos" class="btn-primary">
+        Pedir Turno
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor"/></svg>
+      </a>
+      <a href="#services" class="btn-ghost">Ver servicios →</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num"><span class="count" data-target="500">0</span>+</div>
+      <div class="stat-label">Pacientes felices</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span class="count" data-target="3">0</span></div>
+      <div class="stat-label">Profesionales</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span class="count" data-target="100">0</span><span>%</span></div>
+      <div class="stat-label">Compromiso</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <span>Blanqueamiento</span><span class="dot">✦</span>
+    <span>Ortodoncia</span><span class="dot">✦</span>
+    <span>Implantes</span><span class="dot">✦</span>
+    <span>Diseño de Sonrisa</span><span class="dot">✦</span>
+    <span>Odontología General</span><span class="dot">✦</span>
+    <span>Cirugía Oral</span><span class="dot">✦</span>
+    <span>Blanqueamiento</span><span class="dot">✦</span>
+    <span>Ortodoncia</span><span class="dot">✦</span>
+    <span>Implantes</span><span class="dot">✦</span>
+    <span>Diseño de Sonrisa</span><span class="dot">✦</span>
+    <span>Odontología General</span><span class="dot">✦</span>
+    <span>Cirugía Oral</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label reveal">Nuestros Servicios</div>
+      <h2 class="section-title reveal d1">Todo lo que<br><em>tu boca necesita.</em></h2>
+    </div>
+    <p class="services-desc reveal d2">Tratamientos diseñados con los más altos estándares de calidad, adaptados a cada paciente de manera personalizada.</p>
+  </div>
+  <div class="services-grid">
+    <div class="srv-card reveal">
+      <div class="srv-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M8 12c-2.5 1-4 3-4 5h16c0-2-1.5-4-4-5"/><path d="M10 16l1 4h2l1-4"/></svg>
+      </div>
+      <div class="srv-name">Blanqueamiento Dental</div>
+      <p class="srv-text">Recuperá el blanco natural de tus dientes con tecnología LED de última generación. Resultados visibles desde la primera sesión.</p>
+      <div class="srv-num">01</div>
+    </div>
+    <div class="srv-card reveal d1">
+      <div class="srv-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 4 6 4 9c0 4 3 7 8 13 5-6 8-9 8-13 0-3-2.5-7-8-7z"/><path d="M12 8v4M10 10h4"/></svg>
+      </div>
+      <div class="srv-name">Ortodoncia</div>
+      <p class="srv-text">Brackets y alineadores invisibles para una sonrisa perfectamente alineada. Tratamientos para todas las edades.</p>
+      <div class="srv-num">02</div>
+    </div>
+    <div class="srv-card reveal d2">
+      <div class="srv-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/><path d="M9 3a3 3 0 016 0"/><path d="M9 12h6M12 9v6"/></svg>
+      </div>
+      <div class="srv-name">Odontología General</div>
+      <p class="srv-text">Limpiezas, controles, obturaciones y tratamientos preventivos para mantener tu salud bucal en óptimas condiciones.</p>
+      <div class="srv-num">03</div>
+    </div>
+    <div class="srv-card reveal d3">
+      <div class="srv-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <div class="srv-name">Cirugía Oral</div>
+      <p class="srv-text">Extracciones y procedimientos quirúrgicos realizados con máxima precisión y cuidado para minimizar molestias.</p>
+      <div class="srv-num">04</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT — PINNED SCROLL -->
+<div id="about-outer">
+  <section id="about">
+    <div class="about-pin-inner">
+      <div class="about-left">
+        <div class="about-step active" id="astep-0">
+          <div class="about-step-label">Quiénes Somos</div>
+          <h2>Calidad que<br><em>se siente.</em></h2>
+          <p>TRIA nació con una convicción simple: cada persona merece atención odontológica de excelencia.</p>
+        </div>
+        <div class="about-step" id="astep-1">
+          <div class="about-step-label">Nuestra Misión</div>
+          <h2>Sonrisas que<br><em>cambian vidas.</em></h2>
+          <p>Somos un equipo con vocación real. Cada tratamiento es pensado para vos, con tecnología de punta y un trato humano y cercano.</p>
+        </div>
+        <div class="about-step" id="astep-2">
+          <div class="about-step-label">Nuestro Compromiso</div>
+          <h2>Resultados que<br><em>perduran.</em></h2>
+          <p>No tratamos síntomas, tratamos causas. Cada paciente se va de TRIA con más que un tratamiento: se va con confianza.</p>
+        </div>
+        <div class="about-step" id="astep-3">
+          <div class="about-step-label">El Equipo</div>
+          <h2>Tres profesionales,<br><em>una visión.</em></h2>
+          <p>Cada visita a TRIA es una experiencia pensada para que te vayas con una sonrisa — no solo gracias al tratamiento, sino a cómo te hicimos sentir.</p>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="about-val-card">
+          <div class="about-val-num" id="aval-num">01</div>
+          <div class="about-val-title" id="aval-title">Calidad sin excepciones</div>
+          <div class="about-val-desc" id="aval-desc">Materiales y técnicas de primer nivel en cada tratamiento, sin importar la complejidad.</div>
+          <div class="about-val-progress">
+            <div class="about-val-progress-dot active" id="apd-0"></div>
+            <div class="about-val-progress-dot" id="apd-1"></div>
+            <div class="about-val-progress-dot" id="apd-2"></div>
+            <div class="about-val-progress-dot" id="apd-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-progress" id="about-progress">
+      <div class="about-progress-dot active"></div>
+      <div class="about-progress-dot"></div>
+      <div class="about-progress-dot"></div>
+      <div class="about-progress-dot"></div>
+    </div>
+  </section>
+</div>
+
+<!-- TEAM -->
+<section id="team">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="team-header">
+      <div class="section-label reveal">Nuestro Equipo</div>
+      <h2 class="section-title reveal d1">Las manos detrás<br>de tu <em>sonrisa.</em></h2>
+    </div>
+    <div class="team-layout">
+      <div class="team-photo-wrap reveal">
+        <img src="uploads/imagen.jpg" alt="Equipo TRIA Odontología">
+        <div class="team-photo-overlay">
+          <div class="team-caption">
+            Equipo TRIA
+            <span>Profesionales comprometidos con tu salud</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <div class="team-member-cards">
+          <div class="member-card">
+            <div class="member-avatar">D1</div>
+            <div>
+              <div class="member-name">Dra. Especialista</div>
+              <div class="member-role">Odontología General & Estética</div>
+            </div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar">D2</div>
+            <div>
+              <div class="member-name">Dra. Especialista</div>
+              <div class="member-role">Ortodoncia & Alineadores</div>
+            </div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar">Dr</div>
+            <div>
+              <div class="member-name">Dr. Especialista</div>
+              <div class="member-role">Cirugía Oral & Implantes</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:2rem;padding:2rem;background:var(--green-pale);border-radius:2px">
+          <div style="font-family:var(--display);font-size:1rem;font-weight:700;color:var(--green-mid);margin-bottom:.5rem">Turnos disponibles</div>
+          <div style="font-size:.88rem;color:var(--text-dim);line-height:1.7">Lunes a Viernes de 9:00 a 19:00 hs<br>Sábados de 9:00 a 13:00 hs</div>
+          <a href="#turnos" class="btn-primary" style="margin-top:1.2rem;display:inline-flex;font-size:.72rem">Reservar mi turno →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS — HORIZONTAL SCROLL -->
+<div id="testi-outer">
+  <section id="testimonials">
+    <div class="testi-pin-inner">
+      <div class="testi-top">
+        <div class="section-label" style="color:var(--green-acc)">Lo que dicen nuestros pacientes</div>
+        <h2 class="section-title" style="color:var(--white)">Ellos ya <em style="color:var(--green-acc)">sonríen.</em></h2>
+      </div>
+      <div class="testi-track-wrap">
+        <div class="testi-track" id="testi-track">
+          <div class="testi-card">
+            <div class="testi-quote">"</div>
+            <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+            <p class="testi-text">"Me hicieron el blanqueamiento y quedé sorprendida con el resultado. El equipo es increíble, muy profesionales y atentos en todo momento."</p>
+            <div class="testi-author">Valentina R.</div>
+            <div class="testi-detail">Blanqueamiento Dental</div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-quote">"</div>
+            <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+            <p class="testi-text">"Llevé a mis hijos y la atención fue excelente. Se nota que hay vocación real. El consultorio es moderno y muy limpio. Los recomiendo al 100%."</p>
+            <div class="testi-author">Martín G.</div>
+            <div class="testi-detail">Odontología General</div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-quote">"</div>
+            <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+            <p class="testi-text">"Tenía miedo de hacer ortodoncia pero me explicaron todo paso a paso. Los resultados después de 14 meses son impresionantes. ¡Gracias TRIA!"</p>
+            <div class="testi-author">Luciana M.</div>
+            <div class="testi-detail">Ortodoncia</div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-quote">"</div>
+            <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+            <p class="testi-text">"La extracción del cordal fue sin dolor, súper profesionales. El trato humano marca la diferencia. Ya recomendé TRIA a toda mi familia."</p>
+            <div class="testi-author">Federico A.</div>
+            <div class="testi-detail">Cirugía Oral</div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-quote">"</div>
+            <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+            <p class="testi-text">"Empecé con los alineadores y la diferencia en 6 meses fue increíble. Siempre atentos, siempre disponibles. Una clínica diferente a las demás."</p>
+            <div class="testi-author">Camila B.</div>
+            <div class="testi-detail">Alineadores Invisibles</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-progress-bar"><div class="testi-progress-fill" id="testi-fill"></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- TURNOS -->
+<!-- TURNOS MULTI-STEP -->
+<section id="turnos">
+  <div class="turnos-header">
+    <div class="section-label">Contacto</div>
+    <h2 class="section-title">Tu próxima <em>sonrisa</em><br>empieza hoy.</h2>
+    <p>Completá el formulario y te confirmamos el turno a la brevedad.</p>
+  </div>
+
+  <!-- STEPPER -->
+  <div class="stepper">
+    <div class="step-item">
+      <div class="step-circle active" id="sc-1"><span class="snum">1</span></div>
+    </div>
+    <div class="step-line" id="sl-1"></div>
+    <div class="step-item">
+      <div class="step-circle" id="sc-2"><span class="snum">2</span></div>
+    </div>
+    <div class="step-line" id="sl-2"></div>
+    <div class="step-item">
+      <div class="step-circle" id="sc-3"><span class="snum">3</span></div>
+    </div>
+    <div class="step-line" id="sl-3"></div>
+    <div class="step-item">
+      <div class="step-circle" id="sc-4"><span class="snum">4</span></div>
+    </div>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="form-card">
+
+    <!-- STEP 1: Datos personales -->
+    <div class="form-step active" id="fs-1">
+      <div class="step-h">Datos personales</div>
+      <input class="mf-input" id="f-nombre" type="text" placeholder="Nombre completo" oninput="checkStep1()">
+      <input class="mf-input" id="f-dni" type="text" placeholder="DNI" oninput="checkStep1()">
+      <div class="form-nav">
+        <span></span>
+        <button class="btn-next" id="bn-1" onclick="goTo(2)">Siguiente →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Sede -->
+    <div class="form-step" id="fs-2">
+      <div class="step-h">Elegí tu sede</div>
+      <div class="sede-grid">
+        <div class="sede-card" onclick="selectSede(this,'Lomas de Zamora')">
+          <div class="sede-icon">📍</div>
+          <div class="sede-name">Lomas de Zamora</div>
+        </div>
+        <div class="sede-card disabled">
+          <div class="sede-icon">📍</div>
+          <div class="sede-name">Próximamente</div>
+        </div>
+        <div class="sede-card disabled">
+          <div class="sede-icon">📍</div>
+          <div class="sede-name">Próximamente</div>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-prev" onclick="goTo(1)">Anterior</button>
+        <button class="btn-next" id="bn-2" onclick="goTo(3)">Siguiente →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Tratamiento -->
+    <div class="form-step" id="fs-3">
+      <div class="step-h">Elegí tu tratamiento</div>
+      <div class="trat-grid">
+        <div class="trat-card" onclick="selectTrat(this,'Consulta general')">Consulta general</div>
+        <div class="trat-card" onclick="selectTrat(this,'Limpieza dental')">Limpieza dental</div>
+        <div class="trat-card" onclick="selectTrat(this,'Blanqueamiento')">Blanqueamiento</div>
+        <div class="trat-card" onclick="selectTrat(this,'Extracción dental')">Extracción dental</div>
+        <div class="trat-card" onclick="selectTrat(this,'Ortodoncia')">Ortodoncia</div>
+        <div class="trat-card" onclick="selectTrat(this,'Implantes')">Implantes</div>
+        <div class="trat-card" onclick="selectTrat(this,'Odontopediatría')">Odontopediatría</div>
+        <div class="trat-card" onclick="selectTrat(this,'Control preventivo')">Control preventivo</div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-prev" onclick="goTo(2)">Anterior</button>
+        <button class="btn-next" id="bn-3" onclick="goTo(4)">Siguiente →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Disponibilidad -->
+    <div class="form-step" id="fs-4">
+      <div class="step-h">Tu disponibilidad</div>
+      <div class="disp-label">¿Cuándo preferís?</div>
+      <div class="disp-grid">
+        <div class="disp-pill" onclick="selectDisp(this,'Mañana')">Mañana</div>
+        <div class="disp-pill" onclick="selectDisp(this,'Tarde')">Tarde</div>
+        <div class="disp-pill" onclick="selectDisp(this,'Cualquier horario')">Cualquier horario</div>
+      </div>
+      <input class="mf-input" id="f-motivo" type="text" placeholder="Motivo breve (opcional)">
+      <div class="form-nav">
+        <button class="btn-prev" onclick="goTo(3)">Anterior</button>
+        <button class="btn-next ready" onclick="showSummary()">Revisar pedido →</button>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="form-step" id="fs-summary">
+      <div class="sum-icon">📋</div>
+      <div class="sum-title">Revisá tu solicitud</div>
+      <div class="sum-sub">Este es el mensaje que se enviará por WhatsApp</div>
+      <div class="sum-rows" id="sum-rows"></div>
+      <div class="sum-note">Al confirmar, se abrirá WhatsApp con el mensaje listo para enviar.</div>
+      <button class="btn-wa" onclick="sendWhatsApp()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Confirmar y enviar
+      </button>
+      <button class="btn-edit" onclick="goTo(1)">✏ Editar datos</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">TRIA<span>.</span></div>
+      <p class="footer-tagline">Odontología de calidad, con el trato que merecés.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Servicios</div>
+      <ul class="footer-links">
+        <li><a href="#services">Blanqueamiento</a></li>
+        <li><a href="#services">Ortodoncia</a></li>
+        <li><a href="#services">Odontología General</a></li>
+        <li><a href="#services">Cirugía Oral</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contacto</div>
+      <ul class="footer-links">
+        <li><a href="#turnos">Pedir Turno</a></li>
+        <li><a href="https://wa.me/5491100000000" target="_blank">WhatsApp</a></li>
+        <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="mailto:hola@triaodon.com">hola@triaodon.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 TRIA Odontología. Todos los derechos reservados.</span>
+    <span>Lun–Vie 9–19 hs · Sáb 9–13 hs</span>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ── PRELOADER ──
+const bar = document.getElementById('bar');
+const letters = document.querySelectorAll('#preloader .brand span');
+const tagline = document.querySelector('#preloader .tagline');
+const preloader = document.getElementById('preloader');
+
+let progress = 0;
+const interval = setInterval(() => {
+  progress = Math.min(progress + Math.random() * 8 + 2, 100);
+  bar.style.width = progress + '%';
+  if (progress >= 100) { clearInterval(interval); startReveal(); }
+}, 60);
+
+gsap.fromTo(letters, {y: '110%'}, {y: '0%', duration: 1, ease: 'power3.out', stagger: .1, delay: .3});
+gsap.to(tagline, {opacity: 1, duration: .8, delay: .9});
+
+function startReveal() {
+  setTimeout(() => {
+    gsap.to(letters, {y: '-110%', duration: .7, ease: 'power2.in', stagger: .05});
+    gsap.to([tagline, document.querySelector('.bar-wrap')], {opacity: 0, duration: .5, delay: .1});
+    gsap.to(preloader, {
+      y: '-100%', duration: .9, ease: 'power3.inOut', delay: .5,
+      onComplete: () => { preloader.style.display = 'none'; revealHero(); }
+    });
+  }, 400);
+}
+
+// ── HERO REVEAL ──
+function revealHero() {
+  gsap.fromTo('#eyebrow', {opacity:0,y:20}, {opacity:1,y:0,duration:1,ease:'power3.out',delay:.1});
+  ['#h1','#h2','#h3'].forEach((id,i) => {
+    gsap.fromTo(id, {y:'105%'}, {y:'0%',duration:1.1,ease:'power3.out',delay:.2+i*.12});
+  });
+  gsap.fromTo('#hero-desc', {opacity:0,y:20}, {opacity:1,y:0,duration:.9,ease:'power3.out',delay:.7});
+  gsap.fromTo('#hero-actions', {opacity:0,y:20}, {opacity:1,y:0,duration:.9,ease:'power3.out',delay:.85});
+  gsap.fromTo('.hero-stats', {opacity:0,y:15}, {opacity:1,y:0,duration:.9,ease:'power3.out',delay:1.0});
+  gsap.fromTo('#hero-img', {scale:1.12}, {scale:1.04,duration:2.5,ease:'power2.out',delay:.3});
+  setTimeout(countStats, 1200);
+}
+
+// ── STAT COUNTERS ──
+function countStats() {
+  document.querySelectorAll('.count').forEach(el => {
+    const target = +el.dataset.target;
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.floor(current);
+      if (current >= target) clearInterval(timer);
+    }, 25);
+  });
+}
+
+// ── NAV SCROLL ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── SCROLL REVEAL ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);} });
+}, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── HERO PARALLAX ──
+gsap.to('.hero-photo img', {
+  yPercent: 12, ease: 'none',
+  scrollTrigger: {trigger:'#hero',start:'top top',end:'bottom top',scrub:1}
+});
+
+// ── ABOUT — PINNED SCROLL ──
+const steps = document.querySelectorAll('.about-step');
+const dots  = document.querySelectorAll('.about-progress-dot');
+const totalSteps = steps.length;
+
+const cardData = [
+  { num:'01', title:'Calidad sin excepciones', desc:'Materiales y técnicas de primer nivel en cada tratamiento, sin importar la complejidad.' },
+  { num:'02', title:'Atención personalizada',  desc:'Cada paciente recibe un plan diseñado exclusivamente para sus necesidades y objetivos.' },
+  { num:'03', title:'Tecnología actualizada',  desc:'Equipamiento de última generación para resultados precisos, cómodos y duraderos.' },
+  { num:'04', title:'Resultados duraderos',     desc:'Tratamos el problema de raíz, no solo los síntomas. Tu salud bucal a largo plazo.' },
+];
+
+const avalNum   = document.getElementById('aval-num');
+const avalTitle = document.getElementById('aval-title');
+const avalDesc  = document.getElementById('aval-desc');
+const avalCard  = document.querySelector('.about-val-card');
+const pDots     = document.querySelectorAll('[id^="apd-"]');
+
+let lastIdx = -1;
+function setAboutStep(idx) {
+  if (idx === lastIdx) return;
+  lastIdx = idx;
+  steps.forEach((s,i) => s.classList.toggle('active', i === idx));
+  dots.forEach((d,i)  => d.classList.toggle('active', i === idx));
+  pDots.forEach((d,i) => d.classList.toggle('active', i === idx));
+  // morph card
+  avalCard.style.opacity = '0';
+  avalCard.style.transform = 'translateY(12px)';
+  setTimeout(() => {
+    const d = cardData[idx];
+    avalNum.textContent   = d.num;
+    avalTitle.textContent = d.title;
+    avalDesc.textContent  = d.desc;
+    avalCard.style.transition = 'opacity .5s,transform .5s';
+    avalCard.style.opacity = '1';
+    avalCard.style.transform = 'none';
+  }, 200);
+}
+setAboutStep(0);
+
+ScrollTrigger.create({
+  trigger: '#about-outer',
+  start: 'top top',
+  end: 'bottom bottom',
+  onUpdate: self => {
+    const idx = Math.min(Math.floor(self.progress * totalSteps), totalSteps - 1);
+    setAboutStep(idx);
+  }
+});
+
+// ── TESTIMONIALS — HORIZONTAL SCROLL ──
+const track = document.getElementById('testi-track');
+const fill  = document.getElementById('testi-fill');
+
+ScrollTrigger.create({
+  trigger: '#testi-outer',
+  start: 'top top',
+  end: 'bottom bottom',
+  scrub: 1,
+  onUpdate: self => {
+    const maxX = track.scrollWidth - track.parentElement.offsetWidth;
+    const x = -(self.progress * maxX);
+    gsap.set(track, {x});
+    fill.style.width = (self.progress * 100) + '%';
+  }
+});
+
+// ── HERO PARALLAX MARQUEE speed on scroll ──
+gsap.to('.hero-photo img', {
+  yPercent: 14, ease: 'none',
+  scrollTrigger: {trigger:'#hero',start:'top top',end:'bottom top',scrub:1.5}
+});
+
+// ── MULTI-STEP FORM ──
+const WA_NUMBER = '5491100000000'; // reemplazar con número real
+let formData = { nombre:'', dni:'', sede:'', tratamiento:'', disponibilidad:'', motivo:'' };
+let currentStep = 1;
+
+function animateStep(fromEl, toEl, direction) {
+  // exit current
+  fromEl.classList.add('exit-' + (direction > 0 ? 'left' : 'right'));
+  fromEl.classList.remove('active');
+  fromEl.style.position = 'absolute';
+  fromEl.style.opacity = '0';
+  fromEl.style.transform = direction > 0 ? 'translateX(-50px)' : 'translateX(50px)';
+  fromEl.style.transition = 'opacity .35s,transform .35s';
+
+  // enter next
+  toEl.style.display = 'block';
+  toEl.style.opacity = '0';
+  toEl.style.transform = direction > 0 ? 'translateX(60px)' : 'translateX(-60px)';
+  toEl.style.transition = 'none';
+  toEl.style.position = 'relative';
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      toEl.style.transition = 'opacity .45s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1)';
+      toEl.style.opacity = '1';
+      toEl.style.transform = 'none';
+      toEl.classList.add('active');
+    });
+  });
+
+  setTimeout(() => {
+    fromEl.style.display = 'none';
+    fromEl.style.position = '';
+    fromEl.style.opacity = '';
+    fromEl.style.transform = '';
+    fromEl.style.transition = '';
+  }, 400);
+}
+
+function goTo(step) {
+  const from = document.getElementById('fs-' + currentStep);
+  const to   = document.getElementById('fs-' + step);
+  if (!from || !to) return;
+  const dir = step > currentStep ? 1 : -1;
+  animateStep(from, to, dir);
+
+  // update stepper
+  for (let i = 1; i <= 4; i++) {
+    const sc = document.getElementById('sc-' + i);
+    if (!sc) continue;
+    sc.classList.remove('active','done');
+    if (i < step) sc.classList.add('done');
+    else if (i === step) sc.classList.add('active');
+  }
+  for (let i = 1; i <= 3; i++) {
+    const sl = document.getElementById('sl-' + i);
+    if (sl) sl.classList.toggle('done', i < step);
+  }
+  currentStep = step;
+}
+
+function checkStep1() {
+  const n = document.getElementById('f-nombre').value.trim();
+  const d = document.getElementById('f-dni').value.trim();
+  const btn = document.getElementById('bn-1');
+  if (n && d) { btn.classList.add('ready'); formData.nombre = n; formData.dni = d; }
+  else btn.classList.remove('ready');
+}
+
+function selectSede(el, name) {
+  document.querySelectorAll('.sede-card:not(.disabled)').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  formData.sede = name;
+  document.getElementById('bn-2').classList.add('ready');
+}
+
+function selectTrat(el, name) {
+  document.querySelectorAll('.trat-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  formData.tratamiento = name;
+  document.getElementById('bn-3').classList.add('ready');
+}
+
+function selectDisp(el, name) {
+  document.querySelectorAll('.disp-pill').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  formData.disponibilidad = name;
+}
+
+function showSummary() {
+  formData.motivo = document.getElementById('f-motivo').value.trim() || '—';
+  formData.nombre = document.getElementById('f-nombre').value.trim();
+  formData.dni    = document.getElementById('f-dni').value.trim();
+
+  const rows = [
+    ['Nombre', formData.nombre],
+    ['DNI', formData.dni],
+    ['Sede', formData.sede],
+    ['Tratamiento', formData.tratamiento],
+    ['Disponibilidad', formData.disponibilidad || '—'],
+    ['Motivo', formData.motivo],
+  ];
+
+  const html = rows.map(([k,v]) =>
+    `<div class="sum-row"><span class="sum-key">${k}</span><span class="sum-val">${v}</span></div>`
+  ).join('');
+  document.getElementById('sum-rows').innerHTML = html;
+
+  const from = document.getElementById('fs-4');
+  const to   = document.getElementById('fs-summary');
+  animateStep(from, to, 1);
+
+  // mark all done
+  for (let i = 1; i <= 4; i++) {
+    const sc = document.getElementById('sc-' + i);
+    if (sc) { sc.classList.remove('active'); sc.classList.add('done'); }
+  }
+  for (let i = 1; i <= 3; i++) {
+    const sl = document.getElementById('sl-' + i);
+    if (sl) sl.classList.add('done');
+  }
+}
+
+function sendWhatsApp() {
+  const msg =
+`🦷 *Solicitud de Turno — TRIA Odontología*
+
+👤 *Nombre:* ${formData.nombre}
+🪪 *DNI:* ${formData.dni}
+📍 *Sede:* ${formData.sede}
+🩺 *Tratamiento:* ${formData.tratamiento}
+🕐 *Disponibilidad:* ${formData.disponibilidad || '—'}
+📝 *Motivo:* ${formData.motivo}
+
+_Mensaje generado desde triaodon.com_`;
+
+  const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+// ── MAGNETIC BUTTONS ──
+document.querySelectorAll('.btn-primary,.nav-cta').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width/2) * 0.3;
+    const dy = (e.clientY - r.top  - r.height/2) * 0.3;
+    btn.style.transform = `translate(${dx}px,${dy}px)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+</script>
+</body>
+</html>
